@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { Separator } from "@/components/ui/Separator";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { Billboard } from "@prisma/client";
 import { BillBoardColumn, columns } from "./Columns";
 import { DataTable } from "./data-table";
 type Props = {
@@ -31,7 +30,7 @@ export default function BillBoardClient({ data }: Props) {
         </Button>
       </div>
       <Separator />
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} searchKey="label" />
     </>
   );
 }
