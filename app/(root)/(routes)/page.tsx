@@ -12,5 +12,5 @@ export default function SetupPage() {
       onOpenStoreModal();
     }
   }, [isOpenStoreModal, onOpenStoreModal]);
-  return <div className="p-4"></div>;
+  return null;
 }

@@ -17,7 +17,7 @@ import { formSchema, formValues } from "@/lib/validators/storeModalValidator";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -36,11 +36,14 @@ export default function StoreModal({}: Props) {
     try {
       setIsLoading(true);
       const response = await axios.post("/api/stores", values);
+      router.refresh();
       toast.success("Store created successfully");
+      router.push(`/${response.data.id}`);
     } catch (error) {
       toast.error("Something went wrong, please try again or contact support");
     } finally {
       setIsLoading(false);
+      storeModal.onClose();
     }
   };
   return (
