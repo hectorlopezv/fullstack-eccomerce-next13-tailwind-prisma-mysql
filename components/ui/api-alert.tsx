@@ -1,3 +1,4 @@
+"use client";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/Alert";
 import { Copy, Server } from "lucide-react";
 import { Badge, BadgeProps } from "./Badge";

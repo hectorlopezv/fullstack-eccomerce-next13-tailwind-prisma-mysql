@@ -1,5 +1,4 @@
 "use client";
-
 import { Store } from "@prisma/client";
 import Heading from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
@@ -25,8 +24,8 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import AlertModal from "./ui/modals/AlertModal";
-import ApiAlert from "./ui/api-alert";
+import AlertModal from "@/components/ui/modals/AlertModal";
+import ApiAlert from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
 
 type Props = {

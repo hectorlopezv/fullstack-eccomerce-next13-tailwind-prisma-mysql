@@ -17,6 +17,11 @@ export default function MainNav({ className, ...props }: Props) {
       active: pathname === `/${params.storeId}/settings`,
     },
     {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboards",
+      active: pathname === `/${params.storeId}/billboards`,
+    },
+    {
       href: `/${params.storeId}`,
       label: "Dashboard",
       active: pathname === `/${params.storeId}`,
