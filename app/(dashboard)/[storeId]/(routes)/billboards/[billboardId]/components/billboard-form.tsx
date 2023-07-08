@@ -80,7 +80,7 @@ export default function BillBoardForm({ initialData }: Props) {
       );
 
       router.refresh();
-      router.push("/");
+      router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted");
     } catch (error) {
       toast.error("Something went wrong, please try again later");
