@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BillBoardColumn } from "./Columns";
+import { CategoriesColumn } from "./Columns";
 import { Button } from "@/components/ui/Button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useClipboard } from "@mantine/hooks";
@@ -18,7 +18,7 @@ import { useState } from "react";
 import AlertModal from "@/components/ui/modals/AlertModal";
 
 type Props = {
-  data: BillBoardColumn;
+  data: CategoriesColumn;
 };
 export const revalidate = 0;
 export default function CellAction({ data }: Props) {
@@ -31,10 +31,10 @@ export default function CellAction({ data }: Props) {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
-      router.push(`/${params.storeId}/billboards`);
-      toast.success("Billboard deleted");
+      router.push(`/${params.storeId}/categories`);
+      toast.success("categories deleted");
     } catch (error) {
       toast.error("Something went wrong, please try again later");
     } finally {
@@ -44,7 +44,7 @@ export default function CellAction({ data }: Props) {
   };
   const handleCopy = (id: string) => {
     clipboard.copy(id);
-    toast.success("Billboard id copied to clipboard");
+    toast.success("categories id copied to clipboard");
   };
   return (
     <>
@@ -65,7 +65,7 @@ export default function CellAction({ data }: Props) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
+              router.push(`/${params.storeId}/categories/${data.id}`)
             }
           >
             <Edit className="mr-2 h-4 w-4" />
