@@ -29,7 +29,7 @@ export default async function ProductsPage({ params: { storeId } }: Props) {
     isArchived: item.isArchived,
     price: priceFormatter(Number(item.price)),
     category: item.category.name,
-    size: item.category.name,
+    size: item.size.name,
     color: item.color.value,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
