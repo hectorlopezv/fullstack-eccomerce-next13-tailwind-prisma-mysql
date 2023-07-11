@@ -38,10 +38,6 @@ export async function DELETE(
   try {
     const { userId } = auth();
 
-    if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
-    }
-
     if (!params.productId) {
       return new NextResponse("productId is required", { status: 400 });
     }
@@ -49,7 +45,7 @@ export async function DELETE(
     const storeByUserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
 
@@ -79,10 +75,6 @@ export async function PATCH(
 
     const body = await req.json();
 
-    if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
-    }
-
     const {
       categoryId,
       images,
@@ -101,7 +93,7 @@ export async function PATCH(
     const storeByUserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
 

@@ -3,6 +3,7 @@
 import { useOrigin } from "@/hooks/use-origin";
 import { useParams } from "next/navigation";
 import ApiAlert from "./api-alert";
+import useIsMounted from "@/hooks/use-is-mounted";
 
 type Props = {
   entityName: string;
@@ -11,7 +12,10 @@ type Props = {
 
 export default function ApiList({ entityIdName, entityName }: Props) {
   const params = useParams();
+
   const origin = useOrigin();
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
   const baseUrl = `${origin}/api/${params.storeId}`;
   return (
     <>

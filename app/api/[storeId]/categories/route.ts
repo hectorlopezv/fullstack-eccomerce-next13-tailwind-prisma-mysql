@@ -8,10 +8,6 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("UNAUTHORIZED", { status: 401 });
-    }
     if (!params?.storeId) {
       return new NextResponse("BAD REQUEST", { status: 400 });
     }
@@ -37,16 +33,14 @@ export async function POST(
 ) {
   try {
     const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("UNAUTHORIZED", { status: 401 });
-    }
+
     if (!params?.storeId) {
       return new NextResponse("BAD REQUEST", { status: 400 });
     }
     const storeByuserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
     if (!storeByuserId) {

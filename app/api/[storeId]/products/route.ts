@@ -17,9 +17,6 @@ export async function GET(
     const sizeId = searchParams.get("sizeId") || undefined;
     const isFeatured = searchParams.get("isFeatured") || undefined;
 
-    if (!userId) {
-      return new NextResponse("UNAUTHORIZED", { status: 401 });
-    }
     if (!params?.storeId) {
       return new NextResponse("BAD REQUEST", { status: 400 });
     }
@@ -43,7 +40,6 @@ export async function GET(
         createdAt: "desc",
       },
     });
-
     return NextResponse.json(products);
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -59,16 +55,14 @@ export async function POST(
 ) {
   try {
     const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("UNAUTHORIZED", { status: 401 });
-    }
+
     if (!params?.storeId) {
       return new NextResponse("BAD REQUEST", { status: 400 });
     }
     const storeByuserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
     if (!storeByuserId) {

@@ -6,7 +6,7 @@ import { priceFormatter } from "@/lib/utils";
 type Props = {
   params: { storeId: string };
 };
-
+export const revalidate = 0;
 export default async function ProductsPage({ params: { storeId } }: Props) {
   const products = await prismaDb.product.findMany({
     where: {

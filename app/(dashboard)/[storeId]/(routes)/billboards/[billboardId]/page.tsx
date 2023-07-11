@@ -6,7 +6,7 @@ type Props = {
   params: { billboardId: string };
 };
 
-export default async function BillBoardPage({
+export default async function BilloardPage({
   params: { billboardId },
 }: Props) {
   const billboard = await prismaDb.billboard.findUnique({

@@ -1,11 +1,12 @@
 import prismaDb from "@/lib/prismaDb";
 import React from "react";
-import ProductForm from "./components/product-form";
+import { ProductForm } from "./components/product-form";
+
 
 type Props = {
   params: { productId: string; storeId: string };
 };
-
+export const revalidate = 0;
 export default async function BillBoardPage({
   params: { productId, storeId },
 }: Props) {

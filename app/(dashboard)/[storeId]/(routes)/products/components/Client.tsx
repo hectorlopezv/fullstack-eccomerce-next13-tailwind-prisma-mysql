@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { ProductColumn, columns } from "./Columns";
 import { DataTable } from "./data-table";
 import ApiList from "@/components/ui/api-list";
+import useIsMounted from "@/hooks/use-is-mounted";
 type Props = {
   data: ProductColumn[];
 };
@@ -16,6 +17,8 @@ type Props = {
 export default function ProductsClient({ data }: Props) {
   const router = useRouter();
   const params = useParams();
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
   return (
     <>
       <div className="flex items-center justify-between">

@@ -18,7 +18,7 @@ type Props = {
 
 export default function ImageUpload({
   onChange,
-  value,
+  value = [],
   onRemove,
   disabled,
 }: Props) {
@@ -37,7 +37,7 @@ export default function ImageUpload({
   return (
     <div>
       <div className="mb-4 flex items-center gap-4">
-        {value.map((imageSrc) => (
+        {value?.map((imageSrc) => (
           <div
             key={imageSrc}
             className="relative w-[200px] h-[200px] rounded-md overflow-hidden"

@@ -16,6 +16,9 @@ export async function GET(
       where: {
         id: params.categoryId,
       },
+      include: {
+        billboard: true,
+      },
     });
 
     return NextResponse.json(category);
@@ -32,10 +35,6 @@ export async function DELETE(
   try {
     const { userId } = auth();
 
-    if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
-    }
-
     if (!params.categoryId) {
       return new NextResponse("categoryId id is required", { status: 400 });
     }
@@ -43,7 +42,7 @@ export async function DELETE(
     const storeByUserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
 
@@ -73,10 +72,6 @@ export async function PATCH(
 
     const body = await req.json();
 
-    if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 403 });
-    }
-
     const { billboardId, name } = CategoryFormValidator.parse(body);
 
     if (!params.categoryId) {
@@ -86,7 +81,7 @@ export async function PATCH(
     const storeByUserId = await prismaDb.store.findFirst({
       where: {
         id: params.storeId,
-        userId,
+        userId: userId!,
       },
     });
 

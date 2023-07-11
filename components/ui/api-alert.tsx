@@ -5,6 +5,10 @@ import { Badge, BadgeProps } from "./Badge";
 import { Button } from "@/components/ui/Button";
 import { useClipboard } from "@mantine/hooks";
 import { toast } from "react-hot-toast";
+import useIsMounted from "@/hooks/use-is-mounted";
+
+
+
 interface ApiAlertProps {
   title: string;
   description: string;
@@ -26,11 +30,14 @@ export default function ApiAlert({
   title,
   variant,
 }: ApiAlertProps) {
+  const isMounted = useIsMounted();
   const clipboard = useClipboard({ timeout: 500 });
   const onCopy = (description: string) => {
     clipboard.copy(description);
     toast.success("Copied to clipboard");
   };
+  if (!isMounted) return null;
+
   return (
     <Alert>
       <Server className="w-4 h-4" />
@@ -39,7 +46,7 @@ export default function ApiAlert({
         <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
       </AlertTitle>
       <AlertDescription className="mt-4 flex items-center justify-between">
-        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+        <code suppressHydrationWarning className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
           {description}
         </code>
         <Button

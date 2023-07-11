@@ -6,7 +6,7 @@ export const useOrigin = () => {
   if (!isMounter) {
     return "";
   }
-  if (typeof window !== "undefined" && globalThis?.location?.origin) {
+  if (typeof window !== "undefined" && window?.location?.origin) {
     return globalThis.location.origin;
   }
   return "";
