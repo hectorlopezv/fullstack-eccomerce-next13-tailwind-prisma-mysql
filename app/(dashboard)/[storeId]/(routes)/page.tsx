@@ -1,19 +1,21 @@
+import { getGraphRevenue } from "@/actions/get-graph-revenue";
 import { getSalesCount } from "@/actions/get-sales-count";
 import { getStockCount } from "@/actions/get-stock-count";
 import { getTotalRevenue } from "@/actions/get-total-revenue";
+import OverViewChart from "@/components/OverViewChart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import Heading from "@/components/ui/Heading";
 import { Separator } from "@/components/ui/Separator";
-import prismaDb from "@/lib/prismaDb";
 import { priceFormatter } from "@/lib/utils";
 import { CreditCard, DollarSign, Package } from "lucide-react";
+
 interface DashBoardPageProps {
   params: { storeId: string };
 }
 
 export default async function DashboardPage({ params }: DashBoardPageProps) {
   const totalRevenue = await getTotalRevenue(params.storeId);
-
+  const dataGraph = await getGraphRevenue(params.storeId);
   const salesCount = await getSalesCount(params.storeId);
   const productsInStock = await getStockCount(params.storeId);
   return (
@@ -57,6 +59,14 @@ export default async function DashboardPage({ params }: DashBoardPageProps) {
             </CardContent>
           </Card>
         </div>
+        <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>Overview</CardTitle>
+            <CardContent className="pl-2">
+              <OverViewChart data={dataGraph} />
+            </CardContent>
+          </CardHeader>
+        </Card>
       </div>
     </div>
   );
