@@ -4,6 +4,7 @@ import StoreSwitcher from "./StoreSwitcher";
 
 import prismaDb from "@/lib/prismaDb";
 import isAuth from "@/lib/is-auth";
+import { ModeToggle } from "./ui/ModeToogle";
 
 type Props = {};
 
@@ -21,6 +22,7 @@ export default async function NavBar({}: Props) {
         <StoreSwitcher items={stores} />
         <MainNav className="mx-6" />
         <div className="ml-auto flex items-center space-x-4">
+          <ModeToggle />
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>
